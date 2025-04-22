@@ -1,0 +1,165 @@
+<%- include('./partials/header') %> <% if (success.length > 0) { %>
+<div
+  id="flash-message"
+  class="absolute top-5 left-1/2 -translate-x-1/2 p-3 rounded-md bg-green-500 text-white shadow-lg transition-opacity duration-500"
+>
+  <%= success %>
+</div>
+<% } %> <% if (error.length > 0) { %>
+<div
+  id="flash-message"
+  class="absolute top-5 left-1/2 -translate-x-1/2 p-3 rounded-md bg-red-500 text-white shadow-lg transition-opacity duration-500"
+>
+  <%= error %>
+</div>
+<% } %>
+
+<div class="min-h-screen bg-gray-100">
+  <!-- Hero Section -->
+  <div class="bg-blue-600 text-white py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-5xl font-bold mb-4">Welcome to SwosthaSamaj</h1>
+      <p class="text-xl mb-8">
+        Your one-stop solution for all medical needs. Quality products,
+        affordable prices, and fast delivery.
+      </p>
+      <% if (user && user.role === 'user') { %>
+      <a
+        href="/users/cart"
+        class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition duration-300"
+        >Check Cart</a
+      >
+      <a
+        href="/users/appointment"
+        class="ml-4 bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition duration-300"
+        >Make Appointment</a
+      >
+      <% } else { %>
+      <p class="text-lg font-semibold text-white-800">
+        Join us today to enjoy exclusive benefits and make appointments easily!
+      </p>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Featured Products Section -->
+  <div class="container mx-auto px-6 py-16">
+    <div class="flex justify-center items-center mb-12 relative">
+      <h2 class="text-4xl font-extrabold text-gray-800 text-center">
+        Available Medicines
+      </h2>
+      <% if (user && (user.role === 'staff')) { %>
+      <a
+        href="/owners/admin"
+        class="absolute right-0 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-5 py-2 rounded-full text-md font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+      >
+        + Add Medicine
+      </a>
+      <% } %>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <% products.forEach(product => { %>
+      <div
+        class="relative bg-gradient-to-br from-gray-100 to-white p-8 rounded-3xl shadow-xl transition-transform transform hover:scale-105 hover:shadow-2xl"
+      >
+        <div
+          class="w-full h-56 flex items-center justify-center rounded-xl bg-white/30 backdrop-blur-lg shadow-md"
+        >
+          <img
+            class="h-44 object-cover rounded-lg drop-shadow-xl transition-transform duration-300 hover:scale-110"
+            src="<%= product.image %>"
+            alt="<%= product.name %>"
+          />
+        </div>
+        <h3 class="text-2xl font-bold mt-6 text-center text-gray-900">
+          <%= product.name %>
+        </h3>
+        <p class="text-gray-600 mt-2 text-center text-sm">
+          <%= product.description %>
+        </p>
+
+        <div class="flex flex-col items-center mt-2 space-y-2">
+          <div class="text-center">
+            <% if (product.discount > 0) { %>
+            <p class="text-lg font-semibold text-red-500">
+              <s class="text-gray-500">Rs. <%= product.price %></s> Rs. <%=
+              (product.price - product.discount) %>
+            </p>
+            <% } else { %>
+            <p class="text-lg font-semibold text-gray-800">
+              Rs. <%= product.price %>
+            </p>
+            <% } %>
+          </div>
+        </div>
+
+        <!-- Add to Cart or Buy Now Button -->
+        <% if (user && user.role === 'user') { %>
+        <div class="text-center mt-3 flex gap-2">
+          <form action="/users/addtocart/<%= product.id %>" method="POST">
+            <button
+              type="submit"
+              class="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-5 py-3 rounded-full text-md font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            >
+              Add to Cart
+            </button>
+          </form>
+        </div>
+        <% } else if (user && (user.role === 'admin' || user.role === 'staff'))
+        { %>
+        <div class="text-center mt-3 relative">
+          <a
+            href="/owners/edit/<%= product.id %>"
+            class="inline-block bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-3 rounded-full text-md font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+          >
+            Edit Product
+          </a>
+          <!-- <a
+            href="/owners/delete/<%= product.id %>"
+            class="p-2 bg-red-500 text-white rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg absolute right-0"
+          >
+            <i class="fa-solid fa-trash w-6 h-6"></i>
+          </a> -->
+        </div>
+        <% } else { %>
+        <div class="text-center mt-3">
+          <form action="/buynow" method="POST">
+            <button
+              type="submit"
+              class="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-5 py-3 rounded-full text-md font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            >
+              Buy Now
+            </button>
+          </form>
+        </div>
+        <% } %>
+      </div>
+      <% }) %>
+    </div>
+
+    <div class="bg-blue-50 py-16">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-4">
+          Need Help Choosing the Right Product?
+        </h2>
+        <p class="text-gray-600 mb-8">
+          Our team of experts is here to help you find the best products for
+          your needs.
+        </p>
+        <a
+          href="/contact"
+          class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300"
+          >Contact Us</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <%- include('./partials/footer') %>
+</div>
+
+<script
+  src="https://kit.fontawesome.com/24f74c1771.js"
+  crossorigin="anonymous"
+></script>

@@ -1,0 +1,63 @@
+<%- include('./partials/header') %>
+
+<div class="min-h-screen bg-gray-100 py-12">
+  <div class="container mx-auto px-6">
+    <!-- Page Heading -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-extrabold text-blue-700 mb-4">Our Services</h1>
+      <p class="text-lg text-gray-600">Access essential medical features to manage your health more effectively.</p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      
+      <!-- Pharmacy Services -->
+      <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition duration-300 text-center">
+        <div class="flex justify-center">
+          <svg class="w-12 h-12 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold mb-4">Pharmacy Services</h2>
+        <p class="text-gray-600 mb-4">Manage and add medicines easily for better inventory and access.</p>
+        <a href="/admin/add-medicine" class="text-blue-600 font-semibold hover:text-blue-800">Go to Add Medicine</a>
+      </div>
+
+      <!-- Vaccinations -->
+      <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition duration-300 text-center">
+        <div class="flex justify-center">
+          <svg class="w-12 h-12 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold mb-4">Vaccinations</h2>
+        <p class="text-gray-600 mb-4">Get updated on available vaccines and schedule your shots.</p>
+        <a href="/users/vaccines" class="text-blue-600 font-semibold hover:text-blue-800">View Vaccines</a>
+      </div>
+
+      <!-- Health Records -->
+      <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition duration-300 text-center">
+        <div class="flex justify-center">
+          <svg class="w-12 h-12 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold mb-4">Health Records</h2>
+        <p class="text-gray-600 mb-4">Access your prescriptions and manage your health documentation securely.</p>
+        <a href="/users/prescriptions" class="text-blue-600 font-semibold hover:text-blue-800">View Prescriptions</a>
+      </div>
+
+    </div>
+
+    <!-- Call to Action Section -->
+    <div class="bg-blue-50 mt-20 py-12 rounded-2xl shadow-inner">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-4 text-blue-700">Need Help Choosing a Service?</h2>
+        <p class="text-gray-600 mb-6">Our team is ready to assist you with the right guidance and support.</p>
+        <a href="/contact" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('./partials/footer') %>

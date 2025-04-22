@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swostha Samaj</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- styles.css -->
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <!-- Font Awesome CDN -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.5/cdn.min.js"
+      defer
+    ></script>
+    <script src="/scripts/dropdown.js" defer></script>
+    
+  </head>
+
+  <body
+    class="font-['Helvetica_Now_Display'] bg-[url('/images/background/background2.jpeg')] bg-cover bg-center"
+  >
+    <!-- Navigation Bar -->
+    <nav
+      class="w-full flex justify-between items-center px-6 py-3 border border-gray-300 shadow-lg"
+      style="background: linear-gradient(to right, #0056b3, #007bff)"
+      x-data="{ open: false }"
+    >
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <img
+          src="/images/logo/Swostha Samaj.jpeg"
+          alt="Healthcare Logo"
+          class="h-8 w-8 object-cover rounded-lg"
+        />
+        <h3 class="text-2xl font-semibold text-white">Swostha Samaj</h3>
+      </div>
+
+      <!-- Hamburger Menu (Mobile Only) -->
+      <div class="md:hidden">
+        <button @click="open = !open" class="text-white focus:outline-none">
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Navigation Links -->
+      <div
+        class="md:flex gap-6 text-lg text-white font-semibold hidden"
+        :class="{ 'hidden': !open, 'block': open }"
+      >
+        <%- include('./navbar-links') %>
+        <%- include('./role-links') %>
+      </div>
+
+      <script>
+        
+        function isActive(path) {
+          return window.location.pathname === path;
+        }
+      </script>
+
+      <!-- Auth Buttons -->
+      <div
+        class="md:flex gap-5 hidden"
+        :class="{ 'hidden': !open, 'block': open }"
+      >
+        <%- include('./auth-buttons') %>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu Dropdown -->
+    <div
+      x-show="open"
+      @click.away="open = false"
+      class="md:hidden bg-blue-800 text-white"
+    >
+      <div class="flex flex-col gap-4 p-4">
+        <%- include('./navbar-links') %>
+        <%- include('./role-links') %>
+        <%- include('./auth-buttons') %>
+      </div>
+    </div>
+  </body>
+</html>

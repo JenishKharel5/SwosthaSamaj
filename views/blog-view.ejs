@@ -1,0 +1,39 @@
+<%- include('./partials/header') %>
+<div class="min-h-screen bg-gray-100 py-12">
+  <div class="container mx-auto px-6">
+    <!-- Page Heading (Centered) -->
+    <div class="text-center mb-4">
+      <h1 class="text-4xl font-bold"><%= blog.title %></h1>
+    </div>
+
+    <!-- Blog Posts Grid -->
+    <div class="gap-8">
+      <div
+        class="max-w-3xl overflow-hidden transition-all duration-300 mx-auto"
+      >
+        <img
+          class="w-full h-80 object-cover"
+          src="/<%= blog.image %>"
+          alt="<%= blog.title %>"
+        />
+
+        <div class="p-6">
+          <p class="text-gray-600 mb-4"><%= blog.content %></p>
+          <div class="mt-4 text-sm text-gray-500 flex items-center gap-2">
+            <img
+              src="<%= blog.author_avatar ? '/' + blog.author_avatar : 'https://cdn-icons-png.flaticon.com/512/64/64572.png' %>"
+              class="w-10 h-10 rounded-full"
+              alt=""
+            />
+            <div>
+              <p>Author: <%= blog.author.fullname || 'Anonymous' %></p>
+              <p>Posted at: <%= blog.createdAt.toDateString() %></p>
+            </div>
+          </div>
+        </div>
+        <!-- Author and Posted Date -->
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('./partials/footer') %>

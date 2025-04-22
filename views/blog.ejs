@@ -1,0 +1,94 @@
+<%- include('./partials/header') %>
+
+<div class="min-h-screen bg-gray-100 py-12">
+  <div class="container mx-auto px-6">
+    <!-- Page Heading (Centered) -->
+    <div class="text-center mb-4">
+      <h1 class="text-4xl font-bold">Our Blog</h1>
+      <p class="text-lg text-gray-600 mt-2">
+        Stay updated with the latest health tips, news, and insights from our
+        experts.
+      </p>
+    </div>
+
+    <% if (user && user.role == 'user') { %>
+    <!-- Centered Add Blog Button -->
+    <div class="flex justify-center mb-8">
+      <a
+        href="/users/blog/add"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-300"
+      >
+        + Add Blog Post
+      </a>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded-r-lg">
+      <div class="flex items-start">
+        <div class="flex-shrink-0">
+          <svg
+            class="h-5 w-5 text-blue-500"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </div>
+        <div class="ml-3">
+          <h3 class="text-lg font-medium text-blue-800">
+            Do you have any ideas?
+          </h3>
+          <div class="mt-2 text-blue-700">
+            <p>Share your health tips or blog ideas with our community!</p>
+          </div>
+          <div class="mt-4">
+            <a
+              href="/users/blog/add"
+              class="inline-flex items-center text-blue-600 hover:text-blue-500 font-medium"
+            >
+              Submit your blog post →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- Blog Posts Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <% blogs.forEach(blog => { %>
+      <div
+        class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+      >
+        <img
+          class="w-full h-48 object-cover"
+          src="/<%= blog.image %>"
+          alt="<%= blog.title %>"
+        />
+
+        <div class="p-6">
+          <h2 class="text-2xl font-bold mb-4"><%= blog.title %></h2>
+          <p class="text-gray-600 mb-4 line-clamp-3"><%= blog.content %></p>
+          <a
+            href="/users/blog/<%= blog.id %>"
+            class="text-blue-600 font-semibold hover:text-blue-800"
+          >
+            Read More →
+          </a>
+          <div class="mt-4 text-sm text-gray-500">
+            <p>Author: <%= blog.author.fullname || 'Anonymous' %></p>
+            <p>Posted at: <%= blog.createdAt.toDateString() %></p>
+          </div>
+        </div>
+        <!-- Author and Posted Date -->
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+
+<%- include('./partials/footer') %>
